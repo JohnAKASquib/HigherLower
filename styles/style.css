@@ -1,0 +1,23 @@
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+button {
+  padding: 8px 15px 8px 15px;
+  margin: 8px 15px 8px 15px;
+  width: 25%;
+  color: rgb(236, 231, 231);
+  background: rgb(3, 3, 114);
+  box-shadow: 3px #8b8989;
+  border-radius: 5px;
+}
+button:hover {
+  background: #3b15e4;
+}
+button:active {
+  background: rgb(99, 60, 241);
+}
+p {
+  font-weight: bold;
+}
