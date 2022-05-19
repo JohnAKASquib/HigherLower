@@ -1,4 +1,6 @@
-let validGuess = false,
+//declaring all necessary variables
+let validGuess = false;
+let guesses = [],
   num,
   range,
   p;
@@ -25,9 +27,9 @@ console.log(`The random number is ${num} & the range is ${range}`);
 function checkGuess() {
   //grab our HTML elements first
   let guess = document.getElementsByName("guess")[0].value;
-  if (validateGuess(guess) == false) {
-    return;
-  }
+  //if the function determines the guess isn't valid we'll just return
+  if (validateGuess(guess) == false) return;
+  guesses.push(guess); //add the current guess to the array
   let p = document.getElementsByClassName("response")[0];
   console.log(`Guess is ${guess} and Num is ${num}`); //this was just for big checking
   //set the innerText of p based off of the guess and random number
@@ -36,7 +38,9 @@ function checkGuess() {
   } else if (guess < num) {
     p.innerText = "Try a higher number";
   } else if (guess == num) {
-    p.innerText = "You got it!";
+    p.innerText = `You got it! It took you ${
+      guesses.length
+    } tries and your guesses were ${stringifyGuesses()}`;
   }
   console.log(p); //bug checking
 }
@@ -53,4 +57,16 @@ function validateGuess(guess) {
     return false;
   }
   return true;
+}
+
+function stringifyGuesses() {
+  let guessesString = "";
+  //loop through and add the guesses from the array to the string
+  for (let i = 0; i < guesses.length; i++) {
+    guessesString += guesses[i];
+    //we only add the ", " for all guesses but the last
+    if (i < guesses.length - 1) guessesString += ", ";
+  }
+  console.log(guessesString); // bug checking
+  return guessesString;
 }
