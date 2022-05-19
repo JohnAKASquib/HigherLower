@@ -55,14 +55,15 @@ function isDuplicateGuess(guess) {
   } else return false;
 }
 function validateGuess(guess) {
-  if (isNaN(guess)) {
-    alert("Your guess must be a number");
+  // console.log(`Inside validateGuess guess is ${guess} and range is ${range}`); bug checking
+  if (Number(guess) > range) {
+    alert("Your guess cannot be larger than the max number");
     return false;
-  } else if (guess < 1) {
+  } else if (Number(guess) < 1) {
     alert("Your guess cannot be lower than 1");
     return false;
-  } else if (guess > range) {
-    alert("Your guess cannot be larger than the max number");
+  } else if (isNaN(guess)) {
+    alert("Your guess must be a number");
     return false;
   }
   return true;
