@@ -22,16 +22,18 @@ while (validGuess === false) {
     p.innerText = `Guess a number between 1 and ${range}`;
   }
 }
-console.log(`The random number is ${num} & the range is ${range}`);
+//console.log(`The random number is ${num} & the range is ${range}`); this was just for bug checking
 
 function checkGuess() {
   //grab our HTML elements first
   let guess = document.getElementsByName("guess")[0].value;
+  // console.log(`Guess is ${guess} and Num is ${num}`); for bug checking
   //if the function determines the guess isn't valid we'll just return
   if (validateGuess(guess) == false) return;
+  //if the function determines the guess is a duplicate we'll just return
+  if (isDuplicateGuess(guess) == true) return;
   guesses.push(guess); //add the current guess to the array
   let p = document.getElementsByClassName("response")[0];
-  console.log(`Guess is ${guess} and Num is ${num}`); //this was just for big checking
   //set the innerText of p based off of the guess and random number
   if (guess > num) {
     p.innerText = "Try a lower number";
@@ -42,9 +44,16 @@ function checkGuess() {
       guesses.length
     } tries and your guesses were ${stringifyGuesses()}`;
   }
-  console.log(p); //bug checking
+  //console.log(p); bug checking
 }
 
+function isDuplicateGuess(guess) {
+  //the find method will return undefined if it doesn't find the guess, so if it's not undefined that means the user already guessed the number
+  if (guesses.find((number) => number === guess) != undefined) {
+    alert(`You already guessed ${guess}`);
+    return true;
+  } else return false;
+}
 function validateGuess(guess) {
   if (isNaN(guess)) {
     alert("Your guess must be a number");
@@ -67,6 +76,6 @@ function stringifyGuesses() {
     //we only add the ", " for all guesses but the last
     if (i < guesses.length - 1) guessesString += ", ";
   }
-  console.log(guessesString); // bug checking
+  //console.log(guessesString); bug checking
   return guessesString;
 }
