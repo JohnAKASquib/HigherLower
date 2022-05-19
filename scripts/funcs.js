@@ -25,6 +25,9 @@ console.log(`The random number is ${num} & the range is ${range}`);
 function checkGuess() {
   //grab our HTML elements first
   let guess = document.getElementsByName("guess")[0].value;
+  if (validateGuess(guess) == false) {
+    return;
+  }
   let p = document.getElementsByClassName("response")[0];
   console.log(`Guess is ${guess} and Num is ${num}`); //this was just for big checking
   //set the innerText of p based off of the guess and random number
@@ -36,4 +39,18 @@ function checkGuess() {
     p.innerText = "You got it!";
   }
   console.log(p); //bug checking
+}
+
+function validateGuess(guess) {
+  if (isNaN(guess)) {
+    alert("Your guess must be a number");
+    return false;
+  } else if (guess < 1) {
+    alert("Your guess cannot be lower than 1");
+    return false;
+  } else if (guess > range) {
+    alert("Your guess cannot be larger than the max number");
+    return false;
+  }
+  return true;
 }
